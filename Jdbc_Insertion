@@ -1,0 +1,46 @@
+package com.jspider.jdbc_11am_crud.controller;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.*;
+public class insert2ProductController {
+	public static void main(String[] args) {
+		Connection connection = null;
+		//step-1 create / register driver class
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			//step-2 create connection
+			String url = "jdbc:mysql://localhost:3306/jdbc-11am";
+			String user = "root";
+			String pass = "root";
+			
+			connection =DriverManager.getConnection(url, user, pass);
+			
+			//step-3 create statement
+			Statement statement = connection.createStatement();
+			
+			//step-4 execute Query
+			String insertQuery = "insert into employe values(101,'Nishu', 'abc@gmail.com')";
+			statement.execute(insertQuery);
+			
+			System.out.println("Data add successfully");
+					
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+}
